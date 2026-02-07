@@ -65,13 +65,14 @@
   </div>
 
   <script>
+    const name = "Ajay"; // 👈 CHANGE NAME HERE
     const noBtn = document.getElementById("noBtn");
     const card = document.querySelector(".card");
-    const name = "Ajay"; // 👈 change this
 
     document.getElementById("question").innerText =
       `💘 ${name}, will you be my Valentine? 💘`;
 
+    // Move NO button when hovered
     noBtn.addEventListener("mouseover", () => {
       const maxX = card.clientWidth - noBtn.offsetWidth;
       const maxY = card.clientHeight - noBtn.offsetHeight;
@@ -83,6 +84,7 @@
       noBtn.style.top = y + "px";
     });
 
+    // YES click screen
     function yesClick() {
       document.body.innerHTML = `
         <div style="
@@ -92,20 +94,25 @@
           align-items:center;
           height:100vh;
           background:linear-gradient(135deg, #ff4d6d, #ff9a9e);
-          color:white;
           text-align:center;
           padding:20px;
         ">
           <h1 style="
             color:white;
             font-size:28px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
-       ">
-         yayyy🫶🏻 iluvuuu😚💗
-         </h1>
+            text-shadow:0 4px 10px rgba(0,0,0,0.3);
+          ">
+            yayyy🫶🏻 iluvuuu😚💗
+          </h1>
+
           <img
-            src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-            style="width:250px; margin-top:20px; border-radius:20px;"
+            src="love.jpg"
+            style="
+              width:250px;
+              margin-top:20px;
+              border-radius:20px;
+              box-shadow:0 10px 25px rgba(0,0,0,0.3);
+            "
           >
         </div>
       `;
@@ -114,5 +121,3 @@
 
 </body>
 </html>
-
-

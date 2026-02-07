@@ -14,6 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
 /* CARD */
@@ -54,6 +55,7 @@ button {
 
 .no {
   background: #ddd;
+  transition: left 0.1s ease, top 0.1s ease; /* fast jump effect */
 }
 </style>
 </head>
@@ -75,17 +77,25 @@ button {
 <script>
 const noBtn = document.getElementById("noBtn");
 
-/* NO moves ONLY on click */
+/* NO moves ONLY on click and jumps fast */
 function moveNo() {
-  noBtn.style.transform =
-    `translate(${Math.random()*60 - 30}px, ${Math.random()*30 - 15}px)`;
+  const card = noBtn.closest(".card");
+  const maxX = card.clientWidth - noBtn.offsetWidth;
+  const maxY = card.clientHeight - noBtn.offsetHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.position = "relative";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 }
 
 /* PAGE 2 */
 function yesClick() {
   document.body.innerHTML = `
   <div class="card">
-    <h1>💖 Yayyy ! I knew it 😍💖</h1>
+    <h1>💖 Yayyy Ajuu! I knew it 😍💖</h1>
 
     <img
       src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
@@ -108,10 +118,10 @@ function yesClick() {
 function openThirdPage() {
   document.body.innerHTML = `
   <div class="card">
-    <h1>iluvyouuu 🫶💖</h1>
+    <h1>I luv youuu 🫶💖</h1>
 
     <img
-      src="us.jpeg"
+      src="grid.jpeg"
       style="
         width:100%;
         max-width:320px;
@@ -127,4 +137,3 @@ function openThirdPage() {
 
 </body>
 </html>
-

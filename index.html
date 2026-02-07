@@ -57,7 +57,6 @@
       top: 130px;
     }
 
-    /* Fade-in animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
@@ -67,6 +66,7 @@
 
 <body>
 
+  <!-- FIRST SCREEN -->
   <div class="card">
     <h1 id="question">💘 yourname, will you be my Valentine? 💘</h1>
     <button class="yes" onclick="yesClick()">Yes ❤️</button>
@@ -81,7 +81,7 @@
     document.getElementById("question").innerText =
       `💘 ${name}, will you be my Valentine? 💘`;
 
-    // Move NO button only on hover
+    // Move NO button on hover
     noBtn.addEventListener("mouseover", () => {
       const maxX = card.clientWidth - noBtn.offsetWidth;
       const maxY = card.clientHeight - noBtn.offsetHeight;
@@ -90,6 +90,7 @@
       noBtn.style.top = Math.random() * maxY + "px";
     });
 
+    // SECOND SCREEN (IMAGE IS HERE 👇)
     function yesClick() {
       document.body.innerHTML = `
         <div style="
@@ -111,8 +112,10 @@
             yayyy🫶🏻 iluvuuu😚💗
           </h1>
 
+          <!-- IMAGE INCLUDED HERE -->
           <img
             src="love.jpg"
+            alt="Our memory"
             style="
               width:250px;
               margin-top:20px;

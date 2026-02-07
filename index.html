@@ -5,159 +5,146 @@
   <title>Valentine 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Preload grid image to avoid lag -->
-  <link rel="preload" as="image" href="grid.jpg">
+  <!-- Cute Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    * {
       margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f9c5d1, #fbc2eb);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      width: 100%;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .active {
+      display: flex;
     }
 
     .card {
-      background: white;
-      padding: 30px;
+      background: #ffffff;
+      padding: 30px 25px;
       border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      width: 90%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
       max-width: 350px;
-      position: relative;
+      width: 100%;
     }
 
-    h1 {
-      color: #ff4d6d;
-      margin-bottom: 25px;
+    h1, h2 {
+      color: #e75480;
+      margin-bottom: 20px;
     }
 
     button {
       padding: 12px 25px;
-      font-size: 16px;
       border: none;
       border-radius: 25px;
+      font-size: 16px;
       cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
     }
 
     .yes {
-      background: #ff4d6d;
+      background: #ff5f8f;
       color: white;
     }
 
     .no {
-      background: #ddd;
-      position: absolute;
-      left: 20px;
-      top: 120px;
+      background: #ccc;
+      color: #333;
+      position: relative;
     }
 
-    .clickable-img {
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .clickable-img:hover {
+    button:hover {
       transform: scale(1.05);
+    }
+
+    img {
+      width: 220px;
+      border-radius: 18px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .hint {
+      margin-top: 12px;
+      font-size: 15px;
+      color: #555;
+    }
+
+    /* Page 3 styling */
+    .final-text {
+      font-size: 26px;
+      color: #ff5f8f;
+      font-weight: 600;
     }
   </style>
 </head>
-
 <body>
 
-<div class="card" id="mainCard">
-  <h1>💘 Ajuu will you be my Valentine? 💘</h1>
-  <button class="yes" onclick="yesClick()">Yes ❤️</button>
-  <button class="no" id="noBtn">No 😢</button>
-</div>
+  <!-- PAGE 1 -->
+  <div class="page active" id="page1">
+    <div class="card">
+      <h1>💘 Ajuuu will you be my Valentine? 💘</h1>
+      <button class="yes" onclick="goPage2()">Yes 💖</button>
+      <button class="no" id="noBtn">No 🥺</button>
+    </div>
+  </div>
 
-<script>
-  const noBtn = document.getElementById("noBtn");
-  const card = document.querySelector(".card");
+  <!-- PAGE 2 -->
+  <div class="page" id="page2">
+    <div class="card">
+      <h2>💞 Yayyy I knew it 😍 💞</h2>
 
-  function randomMove() {
-    const maxX = card.clientWidth - noBtn.offsetWidth;
-    const maxY = card.clientHeight - noBtn.offsetHeight;
+      <!-- IMAGE (corrected filename) -->
+      <img src="grid.jpeg" onclick="goPage3()" alt="Our Memories">
 
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
-  }
+      <div class="hint">Surprise 😌</div>
+    </div>
+  </div>
 
-  setInterval(randomMove, 700);
+  <!-- PAGE 3 -->
+  <div class="page" id="page3">
+    <div class="final-text">iluvuuuuu 💗</div>
+  </div>
 
-  function yesClick() {
-    document.body.innerHTML = `
-      <div style="
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        background:linear-gradient(135deg,#ff758c,#ff7eb3);
-        color:white;
-        text-align:center;
-        padding:20px;
-      ">
-        <h1 style="margin-bottom:15px;">💖 Yayyy I knew it 😍💖</h1>
+  <script>
+    function goPage2() {
+      document.getElementById("page1").classList.remove("active");
+      document.getElementById("page2").classList.add("active");
+    }
 
-        <p style="opacity:0.9;">Tap the image 👇</p>
+    function goPage3() {
+      document.getElementById("page2").classList.remove("active");
+      document.getElementById("page3").classList.add("active");
+    }
 
-        <img
-          src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-          alt="Celebrate"
-          class="clickable-img"
-          onclick="showGrid()"
-          style="width:240px; margin-top:20px; border-radius:20px;"
-        >
-      </div>
-    `;
-  }
-
-  function showGrid() {
-    document.body.innerHTML = `
-      <div style="
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-        text-align:center;
-        padding:20px;
-      ">
-        <h1 style="
-          color:#b30047;
-          margin-bottom:15px;
-          text-shadow:0 2px 6px rgba(0,0,0,0.2);
-        ">
-          Us 💕
-        </h1>
-
-        <img
-          src="grid.jpg"
-          style="
-            width:90%;
-            max-width:320px;
-            border-radius:20px;
-            box-shadow:0 10px 25px rgba(0,0,0,0.25);
-          "
-        >
-
-        <p style="
-          margin-top:15px;
-          color:#7a003c;
-          font-size:16px;
-        ">
-          iluvyouuuu💗
-        </p>
-      </div>
-    `;
-  }
-</script>
+    // No button movement ONLY when hovered
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseenter", () => {
+      const x = Math.random() * 150 - 75;
+      const y = Math.random() * 150 - 75;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  </script>
 
 </body>
 </html>

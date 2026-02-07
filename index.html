@@ -14,7 +14,6 @@ body {
   justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
-  overflow: hidden;
 }
 
 .card {
@@ -33,6 +32,13 @@ h1 {
   margin-bottom: 25px;
 }
 
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
+
 button {
   padding: 12px 25px;
   font-size: 16px;
@@ -48,9 +54,7 @@ button {
 
 .no {
   background: #ddd;
-  position: absolute;
-  left: 20px;
-  top: 120px;
+  position: relative;
 }
 </style>
 </head>
@@ -58,23 +62,23 @@ button {
 <body>
 
 <div class="card" id="page1">
-  <h1>💘 Ajuu, will you be my Valentine? 💘</h1>
+  <h1>💘 Ajuu will you be my Valentine? 💘</h1>
 
-  <button class="yes" onclick="yesClick()">Yes ❤️</button>
-  <button class="no" id="noBtn" onclick="moveNo()">No 😢</button>
+  <div class="buttons">
+    <button class="yes" onclick="yesClick()">Yes ❤️</button>
+    <button class="no" id="noBtn" onclick="moveNo()">No 😢</button>
+  </div>
 </div>
+
+<!-- preload gif -->
+<link rel="preload" as="image" href="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
 
 <script>
 const noBtn = document.getElementById("noBtn");
-const card = document.getElementById("page1");
 
-// NO button moves ONLY when clicked
 function moveNo() {
-  const maxX = card.clientWidth - noBtn.offsetWidth;
-  const maxY = card.clientHeight - noBtn.offsetHeight;
-
-  noBtn.style.left = Math.random() * maxX + "px";
-  noBtn.style.top  = Math.random() * maxY + "px";
+  noBtn.style.transform =
+    `translate(${Math.random()*60 - 30}px, ${Math.random()*30 - 15}px)`;
 }
 
 function yesClick() {
@@ -85,20 +89,19 @@ function yesClick() {
     justify-content:center;
     align-items:center;
     height:100vh;
-    background:#ff9a9e;
+    background:linear-gradient(135deg, #ff9a9e, #fad0c4);
     color:white;
     text-align:center;
-    padding:20px;
   ">
-    <h1>💖 Yayyy Ajuu! I knew it 😍💖</h1>
+    <h1>💖 Yayyy ! I knew it 😍💖</h1>
 
     <img
       src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-      style="width:250px; margin-top:20px; border-radius:20px; cursor:pointer;"
+      style="width:220px; margin-top:20px; border-radius:20px; cursor:pointer;"
       onclick="openThirdPage()"
     >
 
-    <p style="margin-top:15px;">Click the image 👆</p>
+    <p style="margin-top:12px;">Click the image 👆</p>
   </div>`;
 }
 
@@ -110,15 +113,21 @@ function openThirdPage() {
     justify-content:center;
     align-items:center;
     height:100vh;
-    background:#ff9a9e;
+    background:linear-gradient(135deg, #ff9a9e, #fad0c4);
     text-align:center;
-    padding:20px;
   ">
     <h1 style="color:white;">I luv youuu 🫶💖</h1>
 
     <img
       src="grid.jpeg"
-      style="max-width:90%; margin-top:20px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.3);"
+      style="
+        max-width:320px;
+        width:90%;
+        height:auto;
+        margin-top:20px;
+        border-radius:20px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.3);
+      "
     >
   </div>`;
 }

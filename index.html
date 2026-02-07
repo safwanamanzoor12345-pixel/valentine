@@ -1,130 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Valentine 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Valentine 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* OG background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-}
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
 
-/* CARD */
-.card {
-  background: white; /* OG card */
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  width: 90%;
-  max-width: 350px;
-}
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 350px;
+      position: relative;
+    }
 
-h1 {
-  color: #ff4d6d;
-  margin-bottom: 25px;
-}
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 25px;
+    }
 
-/* BUTTONS */
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
 
-button {
-  padding: 12px 25px;
-  font-size: 16px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-}
+    .yes {
+      background: #ff4d6d;
+      color: white;
+      margin-right: 10px;
+    }
 
-.yes {
-  background: #ff4d6d;
-  color: white;
-}
-
-.no {
-  background: #ddd;
-}
-</style>
+    .no {
+      background: #ddd;
+      position: absolute;
+      left: 20px;
+      top: 130px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="card" id="page1">
-  <h1>💘 Ajuu, will you be my Valentine? 💘</h1>
-
-  <div class="buttons">
+  <div class="card">
+    <h1 id="question">💘 Ajuu, will you be my Valentine? 💘</h1>
     <button class="yes" onclick="yesClick()">Yes ❤️</button>
-    <button class="no" id="noBtn" onclick="moveNo()">No 😢</button>
+    <button class="no" id="noBtn">No 😢</button>
   </div>
-</div>
 
-<!-- preload gif for faster load -->
-<link rel="preload" as="image" href="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const card = document.querySelector(".card");
+    const name = "Ajuu"; // 👈 change this
 
-<script>
-const noBtn = document.getElementById("noBtn");
+    document.getElementById("question").innerText =
+      `💘 ${name}, will you be my Valentine? 💘`;
 
-/* NO moves ONLY on click */
-function moveNo() {
-  noBtn.style.transform =
-    `translate(${Math.random()*60 - 30}px, ${Math.random()*30 - 15}px)`;
-}
+    noBtn.addEventListener("mouseover", () => {
+      const maxX = card.clientWidth - noBtn.offsetWidth;
+      const maxY = card.clientHeight - noBtn.offsetHeight;
 
-/* PAGE 2 */
-function yesClick() {
-  document.body.innerHTML = `
-  <div class="card">
-    <h1>💖 Yayyy ! I knew it 😍💖</h1>
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
 
-    <img
-      src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-      style="
-        width:220px;
-        margin-top:20px;
-        border-radius:20px;
-        cursor:pointer;
-      "
-      onclick="openThirdPage()"
-    >
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
 
-    <p style="margin-top:12px; color:#ff4d6d;">
-      Click the image 👆
-    </p>
-  </div>`;
-}
-
-/* PAGE 3 */
-function openThirdPage() {
-  document.body.innerHTML = `
-  <div class="card">
-    <h1>iluvyouuu 🫶💖</h1>
-
-    <img
-      src="grid.jpeg"
-      style="
-        width:100%;
-        max-width:320px;
-        height:auto;
-        margin-top:20px;
-        border-radius:20px;
-        box-shadow:0 10px 30px rgba(0,0,0,0.3);
-      "
-    >
-  </div>`;
-}
-</script>
+    function yesClick() {
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          height:100vh;
+          background:linear-gradient(135deg, #ff4d6d, #ff9a9e);
+          color:white;
+          text-align:center;
+          padding:20px;
+        ">
+          <h1>💖 Yayyy ${name}! I knew it 😍💖</h1>
+          <img
+            src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+            style="width:250px; margin-top:20px; border-radius:20px;"
+          >
+        </div>
+      `;
+    }
+  </script>
 
 </body>
 </html>
-
